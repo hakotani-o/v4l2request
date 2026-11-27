@@ -1,3 +1,6 @@
+# 2026-11-28 Add --enable-openssl to the FFmpeg configuration options.
+
+
 #!/bin/bash
 set -e # エラーが発生したらその時点で停止
 set -x
@@ -101,7 +104,7 @@ cp -r /opt .
 mkdir DEBIAN
 cat << 'EOF' > DEBIAN/control
 Package: v4L2-request-ffmpeg-mpv 
-Version: 1.0.0
+Version: 1.0.1
 Section: utils
 Priority: optional
 Architecture: arm64
