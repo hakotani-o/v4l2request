@@ -11,7 +11,7 @@ Orange Pi 5 / Orange Pi 5 Plus（RK3588）向けに **V4L2 Request API** ハー�
 V4L2 Request API 対応の `rkvdec2` ドライバが含まれるカーネル（Linux 7.x 系など）が必要です。また、一般ユーザーでハードウェアデコードを利用するため、`video` および `render` グループへの所属を確認してください。
 
 ```bash
-sudo usermod -aG video,render "\$USER"
+sudo usermod -aG video,render "$USER"
 # 設定反映のため、一度ログアウトして再ログインしてください
 ```
 
@@ -32,8 +32,8 @@ sudo dpkg -i v4l2-request-ffmpeg-mpv*.deb
 `~/.bashrc` に以下を追記し、パスを通します。
 
 ```bash
-export PATH=/opt/v4l2player/bin:\$PATH
-export LD_LIBRARY_PATH=/opt/v4l2player/lib:\$LD_LIBRARY_PATH
+export PATH=/opt/v4l2player/bin:$PATH
+export LD_LIBRARY_PATH=/opt/v4l2player/lib:$LD_LIBRARY_PATH
 ```
 設定後、`source ~/.bashrc` で反映します。
 
@@ -65,8 +65,8 @@ sudo pacman -U ffmpeg-chewitt-*-aarch64.pkg.tar.xz \
 `~/.bashrc` に以下を追記し、パスを通します。
 
 ```bash
-export PATH=/opt/v4l2player/bin:\$PATH
-export LD_LIBRARY_PATH=/opt/v4l2player/lib:\$LD_LIBRARY_PATH
+export PATH=/opt/v4l2player/bin:$PATH
+export LD_LIBRARY_PATH=/opt/v4l2player/lib:$LD_LIBRARY_PATH
 ```
 設定後、`source ~/.bashrc` で反映します。
 
