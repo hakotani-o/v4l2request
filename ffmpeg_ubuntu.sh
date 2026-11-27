@@ -99,13 +99,13 @@ cd /pkg
 cp -r /opt .
 mkdir DEBIAN
 cat << 'EOF' > DEBIAN/control
-Package: V4L2-request-ffmpegr-mpv 
+Package: v4L2-request-ffmpeg-mpv 
 Version: 1.0.0
 Section: utils
 Priority: optional
 Architecture: arm64
 Maintainer: Your Name <you@example.com>
-Description: ffmpeg mpv V4L2-request package
+Description: ffmpeg mpv v4L2-request package
 EOF
 
 cd /
