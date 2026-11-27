@@ -25,8 +25,7 @@ jobs:
           chmod +x *.sh
           ./pkg_ffmpeg.sh
           ./pkg_mpv.sh
-          #./base_ffmpeg.sh
-          #./base_mpv.sh
+          sudo ./build_deb_pkg.sh arm64
             echo "============================"
             ls -l
             echo "============================="
@@ -61,6 +60,7 @@ jobs:
           files: |
             ./ffmpeg-*-aarch64.pkg.tar.*
             ./mpv-*-aarch64.pkg.tar.*
+            ./V4L2-request-ffmpegr-mpv*.deb
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
