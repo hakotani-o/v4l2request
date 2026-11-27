@@ -65,12 +65,18 @@ sed -i '/libbluray/d' PKGBUILD
 sed -i 's/$pkgname/$_pkgname/g' PKGBUILD
 sed -i 's/${pkgname}/${_pkgname}/g' PKGBUILD
 sed -i "s/pkgname=ffmpeg/pkgname=ffmpeg-chewitt\n_pkgname=ffmpeg/" PKGBUILD
-# 後半にある元々の provides=( を、既存の配列に要素を追加する provides+=( に書き換える
-sed -i 's/^provides=(/provides+=(/' PKGBUILD
+sed -i 's/^pkgver=.*/pkgver=9.0.1/' PKGBUILD
+sed -i 's/--prefix=\/usr/--prefix=\/opt\/v4l2player/' PKGBUILD
+#sed -i 's/"$pkgdir"\/usr/"$pkgdir"\/opt\/v4l2player/g' PKGBUILD
+
+sed -i '/^provides=(/,/)/d' PKGBUILD
+
+
 
 # 後半の provides 判定に使われないよう、冒頭の追加部分の検索フック用目印（conflicts）の依存順を整える
-sed -i "/pkgname=ffmpeg-chewitt/a conflicts=('ffmpeg')" PKGBUILD
-sed -i "/conflicts=('ffmpeg')/a provides=('ffmpeg' 'ffplay' 'ffprobe' 'qt-faststart')" PKGBUILD
+
+sed -i 's|/usr/lib/mbedtls2/pkgconfig|/opt/v4l2player/lib/pkgconfig|' PKGBUILD
+sed -i 's|install -Dm 755 ffmpeg/tools/qt-faststart "${pkgdir}"/usr/bin/|install -Dm 755 ffmpeg/tools/qt-faststart "${pkgdir}"/opt/v4l2player/bin|' PKGBUILD
 
 # KOKO
 # 【最適化1】RK3588のCPU(Cortex-A76+A55)に合わせた CFLAGS / CXXFLAGS の強制注入

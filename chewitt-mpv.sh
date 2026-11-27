@@ -57,9 +57,36 @@ echo "---------------------------------------------------"
 
 sed -i "/'libjpeg'/d" PKGBUILD
 sed -i "/'ffmpeg'/d" PKGBUILD
+#sed -i 's/^pkgname=mpv/pkgname=mpv-manjaro-h616/' PKGBUILD
+#sed -i 's|--prefix=/usr|--prefix=/opt/v4l2player|' PKGBUILD
+#sed -i '/conflicts/d' PKGBUILD
+#sed -i 's|arch-meson mpv build|arch-meson --prefix=/opt/v4l2player mpv build|' PKGBUILD
+#sed -i '/^build/a  \\nexport PKG_CONFIG_PATH="/opt/v4l2player/lib/pkgconfig:$PKG_CONFIG_PATH"\\n' PKGBUILD
+#sed -i 's|$${pkgdir}/usr|$${pkgdir}/opt/v4l2player|' PKGBUILD
+# パッケージ名変更と競合設定の削除
+sed -i 's/^pkgname=mpv/pkgname=mpv-v4l2request/' PKGBUILD
+sed -i '/^provides=(/d; /^conflicts=(/d' PKGBUILD
+
+# pkg-config のパス追加と prefix / rpath の挿入
+sed -i 's|arch-meson mpv build \\|export PKG_CONFIG_PATH="/opt/v4l2player/lib/pkgconfig"\n  arch-meson mpv build \\\n    --prefix="/opt/v4l2player" \\\n    --auto-features="auto" \\\n    -Dc_link_args="-Wl,-rpath,/opt/v4l2player/lib" \\\n    -Dcpp_link_args="-Wl,-rpath,/opt/v4l2player/lib" \\|' PKGBUILD
+
+# package() 内の /usr パスを /opt/v4l2player に置換
+sed -i 's|\${pkgdir}/usr|\${pkgdir}/opt/v4l2player|g' PKGBUILD
+
+
+
+#build() {
+#  export PKG_CONFIG_PATH="/opt/v4l2player/lib/pkgconfig"
+#
+#  local _meson_options=(
+#    --prefix=/opt/v4l2player
+#    --auto-features auto
+#    -Dc_link_args="-Wl,-rpath,/opt/v4l2player/lib"
+#    -Dcpp_link_args="-Wl,-rpath,/opt/v4l2player/lib"
+#    ...
 
 # チェックサムの再更新
-#updpkgsums
+updpkgsums
 
 # mpv-v4l2request のビルド（--noconfirm で依存関係の自動インストールを許可）
 MAKEFLAGS="-j$(nproc)" makepkg -sri --noconfirm 2>&1|tee ~/arch-build-log.txt
@@ -68,7 +95,7 @@ EOF
 # === 一般ユーザーでの実行ここまで ===
 
 # 出来上がったパッケージをコンテナのルート「/」に配置
-cp /home/builder/mpv-v4l2request/mpv-[0-9]*-aarch64.pkg.tar.* /
+cp /home/builder/mpv-v4l2request/mpv-v4l2request-[0-9]*-aarch64.pkg.tar.* /
 
 # ビルドログを root 権限で / に退避（base_kernel.sh が回収できるようにする）
 cp /home/builder/*.txt / 2>/dev/null || true

@@ -33,7 +33,7 @@ sudo pacstrap ./base_camp base sudo arch-install-scripts archlinux-keyring
 sudo cp chewitt-mpv.sh ffmpeg-*aarch64.pkg.tar* ./base_camp
 sudo cp -a etc keyrings ./base_camp
 sudo systemd-nspawn -D ./base_camp --resolv-conf=replace-host --as-pid2 /chewitt-mpv.sh
-cp  base_camp/mpv-[0-9]*-aarch64.pkg.tar.* .
+cp  base_camp/mpv-v4l2request-[0-9]*-aarch64.pkg.tar.* .
 if [ $mem_size -gt 13 ]; then
         sudo umount base_camp
 	rm -rf base_camp
