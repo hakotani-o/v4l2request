@@ -54,6 +54,7 @@ jobs:
           body: |
             Arch linux v4l2request Orange Pi 5 / 5-PLUS 
             ビルド日時: ${{ steps.date.outputs.now }}
+            ### 2026-11-28 ffmpeg_ubuntu.sh Add --enable-openssl to the FFmpeg configuration options.
           draft: false
           prerelease: false
           # ここに圧縮済みファイルのパスを指定します
