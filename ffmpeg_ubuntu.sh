@@ -29,7 +29,7 @@ sudo apt install -y \
   liblua5.2-dev libcurl4-openssl-dev \
   zlib1g-dev libbz2-dev liblzma-dev \
   glslang-dev glslang-tools devscripts dpkg-dev fakeroot wget equivs \
-  python3-glad
+  python3-glad libssl-dev
 
 cd ffmpeg-v4l2request
 
@@ -48,7 +48,8 @@ sudo chown -R "$USER":"$USER" /opt/v4l2player
   --enable-pic \
   --enable-libdrm \
   --disable-doc \
-  --disable-debug
+  --disable-debug \
+  --enable-openssl
 
 make -j"$(nproc)"
 make checkheaders
